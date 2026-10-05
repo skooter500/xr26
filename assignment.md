@@ -33,7 +33,7 @@ Technology you can use:
 
 Projects can be completed **individually or in teams of up to 3 students**.
 
-## Proposal (10% - Due 7th November)
+## Proposal (10%)
 
 Submit your proposal on Brightspace. Your proposal should include:
 
