@@ -8,6 +8,8 @@ extends CharacterBody3D
 
 @export var fire_rate:int = 10
 
+@onready var wall = $"../wall"
+
 @onready  var timer = $Timer
 
 func print_stuff():
@@ -22,11 +24,12 @@ func print_stuff():
 	DebugDraw2D.set_text("global basis.x", global_transform.basis.x)
 	DebugDraw2D.set_text("global basis.y", global_transform.basis.y)
 	DebugDraw2D.set_text("global basis.z", global_transform.basis.z)
-	print(scale)
-	print(global_scale)
+	#print(scale)
+	#print(global_scale)
 	
 
 func _time_out():
+	#print("fira again")
 	can_fire = true
 
 func _ready() -> void:
@@ -41,14 +44,15 @@ func _physics_process(delta: float) -> void:
 	print_stuff()
 
 	# Other ways of moving by manipulating the transform	
-	# position.z += speed * delta
 	# global_position.z += speed * delta
 	
 	var f = Input.get_axis("back", "forward")
 	
 	var v = Vector3()	
 	v = global_transform.basis.z # My direction vector	
+	# print(global_transform.basis.z)
 	velocity = v * speed * f
+	# position += speed * delta * global_transform.basis.z * f
 	
 	move_and_slide()
 	
@@ -63,7 +67,9 @@ func _physics_process(delta: float) -> void:
 	if can_fire and Input.is_action_pressed("shoot"):
 		var bullet = bullet_scene.instantiate()
 		get_parent().add_child(bullet)
-		can_fire = false
+		#can_fire = fals
+		#print("not can fire ")
+	
 		bullet.global_position = bullet_spawn.global_position
 		bullet.global_rotation = global_rotation
 		timer.start()

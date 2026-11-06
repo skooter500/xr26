@@ -14,8 +14,8 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="eXtended Reality Prototyping 25"
-run/main_scene="uid://ds5a0kbqntaeg"
+config/name="eXtended Reality 26"
+run/main_scene="uid://cq6pol5srri47"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
 
@@ -33,6 +33,10 @@ settings/addon_root_folder="res://addons/debug_draw_3d"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/csg_toolkit/plugin.cfg", "res://addons/godot-xr-tools/plugin.cfg")
+
+[gui]
+
+theme/custom_font="uid://c7m2s77s7pxfy"
 
 [input]
 
@@ -111,6 +115,7 @@ sprint={
 renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
 anti_aliasing/quality/msaa_3d=3
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
 
 [shader_globals]
 

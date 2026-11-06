@@ -29,3 +29,8 @@ func _on_body_entered(b: Node3D) -> void:
 		self.queue_free()		
 		b.queue_free()		
 		pass
+
+
+func _on_area_entered(area: Area3D) -> void:
+	print("area entered!!!")
+	pass # Replace with function body.

@@ -3,9 +3,13 @@ extends Node3D
 @export var brick_scene:PackedScene
 @export var rows = 10
 @export var cols = 10
+@export var hello:Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	get_tree().root.find_child("hello", true)
+	# hello = get_parent().get_node("hello")
+	hello.text = "Hello from Bryasbn"
 	for row in range(rows):
 		for col in range(cols):
 			var brick = brick_scene.instantiate()

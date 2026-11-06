@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://os3ynb2quy8n"]
+[gd_scene format=3 uid="uid://os3ynb2quy8n"]
 
 [ext_resource type="Script" uid="uid://bioochigftltm" path="res://examples/tank_game_3d/tank.gd" id="1_580ab"]
 [ext_resource type="PackedScene" uid="uid://c1bnq83851e46" path="res://examples/tank_game_3d/bullet.tscn" id="2_h2vem"]
@@ -14,7 +14,7 @@ size = Vector3(0.1, 0.1, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_yo8sf"]
 size = Vector3(0.1, 0.1, 1)
 
-[node name="tank" type="CharacterBody3D" node_paths=PackedStringArray("bullet_spawn")]
+[node name="tank" type="CharacterBody3D" unique_id=1633654159 node_paths=PackedStringArray("bullet_spawn")]
 floor_constant_speed = true
 script = ExtResource("1_580ab")
 speed = 5.0
@@ -23,29 +23,29 @@ bullet_scene = ExtResource("2_h2vem")
 bullet_spawn = NodePath("bullet_spawn")
 fire_rate = 2
 
-[node name="player" type="MeshInstance3D" parent="."]
+[node name="player" type="MeshInstance3D" parent="." unique_id=1055157173]
 material_override = ExtResource("3_jutur")
 mesh = SubResource("BoxMesh_dedr2")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=163014125]
 shape = SubResource("BoxShape3D_tuvxv")
 
-[node name="cam_target" type="Marker3D" parent="."]
+[node name="cam_target" type="Marker3D" parent="." unique_id=1512878154]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.8546605, -10.165279)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=834692585]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.555838, 0.500628)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=895842452]
 material_override = ExtResource("3_jutur")
 mesh = SubResource("BoxMesh_0ug6i")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1950340371]
 shape = SubResource("BoxShape3D_yo8sf")
 
-[node name="bullet_spawn" type="Marker3D" parent="."]
+[node name="bullet_spawn" type="Marker3D" parent="." unique_id=1116450114]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.54856, 1.64877)
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1813508]
 one_shot = true

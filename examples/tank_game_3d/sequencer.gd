@@ -47,7 +47,7 @@ func print_sequence():
 		
 func play_sample(e, i):
 	
-	print("play sample:" + str(i))
+	#print("play sample:" + str(i))
 	var p:AudioStream = samples[i]
 	var asp = players[asp_index]
 	asp.stream = p
@@ -55,7 +55,7 @@ func play_sample(e, i):
 	asp_index = (asp_index + 1) % players.size()
 
 func toggle(e, row, col):
-	print("toggle " + str(row) + " " + str(col))
+	#print("toggle " + str(row) + " " + str(col))
 	sequence[row][col] = ! sequence[row][col]
 	play_sample(0, row)
 	print_sequence()

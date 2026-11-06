@@ -38,6 +38,11 @@ roughness = 0.36
 emission_enabled = true
 normal_enabled = true
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_uoiw8"]
+size = Vector3(1, 2.305542, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_uoiw8"]
+
 [node name="TankGame3D" type="Node3D" unique_id=803159750]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1043791175]
@@ -53,10 +58,11 @@ script = ExtResource("1_i2j3l")
 target = NodePath("../tank/cam_target")
 player = NodePath("../tank")
 
-[node name="wall" type="Node3D" parent="." unique_id=1957887430]
+[node name="wall" type="Node3D" parent="." unique_id=1957887430 node_paths=PackedStringArray("hello")]
 transform = Transform3D(0.599429, 0, -0.800428, 0, 1, 0, 0.800428, 0, 0.599429, -16.239841, 0, -23.516115)
 script = ExtResource("2_q73g1")
 brick_scene = ExtResource("3_c5v0u")
+hello = NodePath("../hello")
 
 [node name="Marker3D" type="Marker3D" parent="wall" unique_id=446264291]
 
@@ -72,12 +78,15 @@ shape = SubResource("WorldBoundaryShape3D_307sh")
 
 [node name="tank" parent="." unique_id=1971224244 instance=ExtResource("5_tmdlf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+speed = 20.0
+fire_rate = 1
 
 [node name="tower" type="Marker3D" parent="." unique_id=2067632705]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.692439, 0.5, 8.002671)
 script = ExtResource("8_q1488")
 brick_scene = ExtResource("3_c5v0u")
 radius = 5.0
+height = 100.0
 elements = 22
 brick_size = 1.0
 
@@ -89,5 +98,22 @@ script = ExtResource("7_bogbv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_jb5pm")
 surface_material_override/0 = SubResource("StandardMaterial3D_hh1m8")
+
+[node name="hello" type="Label" parent="." unique_id=1243132564]
+offset_left = 728.0
+offset_top = 388.0
+offset_right = 768.0
+offset_bottom = 411.0
+text = "Hello!!!!!!"
+
+[node name="hit_area" type="Area3D" parent="." unique_id=1587866057]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7332709, 0.5247855, 2.3884306)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hit_area" unique_id=825080134]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.652771, 0)
+shape = SubResource("BoxShape3D_uoiw8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="hit_area" unique_id=1094273819]
+mesh = SubResource("BoxMesh_uoiw8")
 
 [editable path="tank"]
