@@ -7,8 +7,13 @@ const JUMP_VELOCITY = 4.5
 var coins = 0
 
 var speed = 2
-
+var t = 4
 var log = ""
+
+func _ready() -> void:
+	var f1 = position.distance_to($"../pickup".position)
+	
+	speed = f1 / t
 
 func _process(delta):
 	log = ""
@@ -54,12 +59,21 @@ func add_coins():
 	coins += 1
 	$"../coins".text = "Coins: " + str(coins)
 
+
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
-	#velocity = basis.z * speed
-	#move_and_slide()
-	#position += basis.z * speed
-	rotate_y(delta * 0.3)
+	var v2:Vector3 = $"../pickup".position - position
+	v2 = v2.normalized()
+	velocity = v2 * speed
+	
+	var t1 = Vector3.BACK.angle_to(v2)
+	log_text("angle to: " + str(rad_to_deg(t1)))
+	
+	rotation = Vector3(0, t1, 0)
+	#look_at($"../pickup".global_position, Vector3.UP)
+	move_and_slide()
+	#position += v2 * speed * delta
+	# rotate_y(delta * 0.3)
 
 
 func _on_pickup_body_entered(body: Node3D) -> void:

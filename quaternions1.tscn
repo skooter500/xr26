@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://c32842r0ktu5a"]
+
+[ext_resource type="Script" uid="uid://db6qy6tmvi6qt" path="res://quat_player.gd" id="1_nwaaf"]
+[ext_resource type="Script" uid="uid://c4l3kglh4241r" path="res://pickup.gd" id="2_u7qcv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1bhpm"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_cp1ev"]
+sky_material = SubResource("ProceduralSkyMaterial_1bhpm")
+
+[sub_resource type="Environment" id="Environment_tt0g4"]
+sky = SubResource("Sky_cp1ev")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mimrm"]
+albedo_color = Color(0.25, 0, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_uoiw8"]
+material = SubResource("StandardMaterial3D_mimrm")
+size = Vector2(100, 100)
+subdivide_width = 10
+subdivide_depth = 10
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_uoiw8"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uoiw8"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_uoiw8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mimrm"]
+size = Vector3(1, 1, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cp1ev"]
+albedo_color = Color(0.050000012, 0.22416651, 1, 1)
+metallic = 0.2
+metallic_specular = 0.54
+roughness = 0.15
+
+[sub_resource type="BoxMesh" id="BoxMesh_uoiw8"]
+material = SubResource("StandardMaterial3D_cp1ev")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uoiw8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ur2t2"]
+font_size = 100
+
+[node name="vectors" type="Node3D" unique_id=1840469210]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1186752346]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 9.589832, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=492661884]
+environment = SubResource("Environment_tt0g4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1299776844]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1209644077]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1158689088]
+mesh = SubResource("PlaneMesh_uoiw8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=146721828]
+shape = SubResource("WorldBoundaryShape3D_uoiw8")
+
+[node name="player" type="CharacterBody3D" parent="." unique_id=342410340]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0891683, 2.4189672)
+script = ExtResource("1_nwaaf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player" unique_id=2041091509]
+shape = SubResource("CapsuleShape3D_uoiw8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="player" unique_id=1475470765]
+mesh = SubResource("CapsuleMesh_uoiw8")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="player" unique_id=1832011371]
+mesh = SubResource("BoxMesh_mimrm")
+
+[node name="pickup" type="Area3D" parent="." unique_id=754340901]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.700765, 0.73424625, -1.9473484)
+script = ExtResource("2_u7qcv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="pickup" unique_id=2092988952]
+mesh = SubResource("BoxMesh_uoiw8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pickup" unique_id=1676494593]
+shape = SubResource("BoxShape3D_uoiw8")
+
+[node name="coins" type="Label" parent="." unique_id=742427195]
+offset_left = 58.0
+offset_top = 61.0
+offset_right = 98.0
+offset_bottom = 84.0
+text = "Coins: 0"
+label_settings = SubResource("LabelSettings_ur2t2")
+
+[node name="log" type="Label" parent="." unique_id=1020801496]
+offset_top = 193.0
+offset_right = 40.0
+offset_bottom = 210.0
+
+[connection signal="body_entered" from="pickup" to="pickup" method="_on_body_entered"]
